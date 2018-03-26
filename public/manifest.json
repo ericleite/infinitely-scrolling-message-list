@@ -1,0 +1,9 @@
+{
+  "short_name": "Infinitely Scrolling Message List",
+  "name": "Infinitely Scrolling Message List",
+  "icons": [],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#673ab7",
+  "background_color": "#ffffff"
+}
