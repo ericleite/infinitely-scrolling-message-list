@@ -1,17 +1,22 @@
 // Libs
 import React, { Component } from 'react';
+import withTheme from '../../withTheme';
 
-// CSS
-import './App.css';
+// Components
+import AppBar from '../AppBar/AppBar';
+import MessageList from '../MessageList/MessageList';
 
 class App extends Component {
 
   render() {
     return (
-      <div>Hello world!</div>
+      <div className="App">
+        <AppBar title={ "Messages" } />
+        <MessageList messages={ [] } />
+      </div>
     );
   }
 
 }
 
-export default App;
+export default withTheme(App);
