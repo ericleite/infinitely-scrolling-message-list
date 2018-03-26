@@ -1,5 +1,5 @@
 // Libs
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 
@@ -16,26 +16,51 @@ const styles = {
   }
 };
 
-function AppBar(props) {
-  const { classes, title } = props;
-  return (
-    <div className={classes.root}>
-      <MuiAppBar position="fixed" color="primary">
-        <Toolbar disableGutters>
-          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="title" color="inherit">
-            { title }
-          </Typography>
-        </Toolbar>
-      </MuiAppBar>
-    </div>
-  );
-}
+class AppBar extends PureComponent {
 
-AppBar.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
+  static propTypes = {
+    classes: PropTypes.object.isRequired,
+  }
+
+  state = {
+    appBarHeight: 0
+  }
+
+  componentDidMount() {
+    const appBarRect = this.appBarRef.getBoundingClientRect();
+    this.setState({
+      appBarHeight: appBarRect.height
+    })
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const appBarRect = this.appBarRef.getBoundingClientRect();
+    if (prevState.appBarHeight !== appBarRect.height) {
+      this.setState({
+        appBarHeight: appBarRect.height
+      })
+    }
+  }
+
+  render() {
+    const { classes, title } = this.props;
+    return (
+      <div className={classes.root} style={ { height: `${this.state.appBarHeight}px` } }>
+        <MuiAppBar position="fixed" color="primary">
+          <div ref={ (node) => { this.appBarRef = node; } }>
+            <Toolbar disableGutters>
+              <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="title" color="inherit">
+                { title }
+              </Typography>
+            </Toolbar>
+          </div>
+        </MuiAppBar>
+      </div>
+    );
+  }
+}
 
 export default withStyles(styles)(AppBar);

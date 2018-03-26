@@ -1,8 +1,9 @@
+//Libs
 import React from 'react';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
-import grey from 'material-ui/colors/grey';
-import deepPurple from 'material-ui/colors/deepPurple';
 import CssBaseline from 'material-ui/CssBaseline';
+import deepPurple from 'material-ui/colors/deepPurple';
+import grey from 'material-ui/colors/grey';
 
 const theme = createMuiTheme({
   palette: {
@@ -14,6 +15,9 @@ const theme = createMuiTheme({
     background: {
       default: grey[200]
     }
+  },
+  typography: {
+    fontSize: 16
   }
 });
 
