@@ -21,7 +21,10 @@ const styles = {
 class MessageList extends Component {
 
   static propTypes = {
+    ariaBusy: PropTypes.string.isRequired,
+    ariaDescribedby: PropTypes.string.isRequired,
     classes: PropTypes.object.isRequired,
+    getMessageListRef: PropTypes.func,
     messages: PropTypes.array,
     onDeleteMessage: PropTypes.func
   }
@@ -31,18 +34,20 @@ class MessageList extends Component {
     messages: []
   }
 
-  handleTouchMove = (e) => {
-    // TODO: Allow scroll when vertical touch event happens on a message.
-    // console.log('moved', e.targetTouches[0].clientX);
-  }
-
   render() {
-    const { classes, messages, onDeleteMessage } = this.props;
+    const {
+      ariaBusy,
+      ariaDescribedby,
+      classes,
+      getMessageListRef,
+      messages,
+      onDeleteMessage
+    } = this.props;
 
     const messageCards = messages.map(({ id, author, content, updated }) => {
       const avatar = author.photoUrl
         ? <Avatar alt={`Photo of ${author.name}`} src={`${apiEndpoint}/${author.photoUrl}`} className={classes.avatar} />
-        : <Avatar aria-label="Message sender avatar" className={classes.avatar} />
+        : <Avatar aria-label="Message sender avatar" className={classes.avatar}>{author.name.charAt()}</Avatar>
 
       return (
         <Grid key={ id } item>
@@ -59,11 +64,16 @@ class MessageList extends Component {
     });
 
     return (
-      <div className={classes.root} onTouchMove={ this.handleTouchMove }>
+      <section
+        aria-busy={ ariaBusy }
+        aria-describedby={ ariaDescribedby }
+        className={classes.root}
+        ref={ (node) => { getMessageListRef && getMessageListRef(node); } }
+      >
         <Grid container direction="column" spacing={8}>
           { messageCards }
         </Grid>
-      </div>
+      </section>
     );
   }
 }

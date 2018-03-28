@@ -18,20 +18,23 @@ const theme = createMuiTheme({
   },
   typography: {
     fontSize: 16
+  },
+  zIndex: {
+    progressIndicator: 1050
   }
 });
 
-function withRoot(Component) {
-  function WithRoot(props) {
+function withTheme(Component) {
+  function WithTheme(props) {
     return (
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
-        <Component {...props} />
+        <Component theme={theme} {...props} />
       </MuiThemeProvider>
     );
   }
 
-  return WithRoot;
+  return WithTheme;
 }
 
-export default withRoot;
+export default withTheme;
