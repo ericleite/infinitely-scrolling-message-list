@@ -36,6 +36,17 @@ class App extends Component {
       });
   }
 
+  handleDeleteMessage = (id) => {
+    let messages = this.state.messageData.messages;
+    messages = messages.filter(m => m.id !== id);
+    this.setState({
+      messageData: {
+        ...this.state.messageData,
+        messages
+      }
+    });
+  }
+
   componentDidMount() {
     this.fetchMessages()
       .then(({ data, ok }) => {
@@ -68,7 +79,7 @@ class App extends Component {
             <CircularProgress />
           </Grid>
         </Grow>
-        <MessageList messages={ this.state.messageData.messages } />
+        <MessageList messages={ this.state.messageData.messages } onDeleteMessage={ this.handleDeleteMessage } />
       </div>
     );
   }
