@@ -13,7 +13,7 @@ import { apiEndpoint } from '../../utils/APIUtils';
 
 const styles = {
   root: {
-    padding: '0.75rem',
+    padding: '1rem',
     overflowX: 'hidden'
   }
 };
