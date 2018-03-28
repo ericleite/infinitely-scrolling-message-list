@@ -1,4 +1,4 @@
-export const apiEndpoint = 'http://message-list.appspot.com';
+export const apiEndpoint = 'https://message-list.appspot.com';
 
 export const messagesApiEndpoint = `${apiEndpoint}/messages`;
 
