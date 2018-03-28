@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import moment from 'moment';
-import Draggable from 'react-draggable';
+import Draggable from '../../temp/react-draggable';
 import { withContentRect } from 'react-measure';
 import BezierEasing from 'bezier-easing';
 
